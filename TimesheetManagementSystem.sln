@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetManagementUI", "TimesheetManagementUI\TimesheetManagementUI.csproj", "{2AB1EBFE-4541-4FBA-813F-76030A3F7AE4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetManagementAPIServices", "TimesheetManagementAPIServices\TimesheetManagementAPIServices.csproj", "{7D29C42C-86BB-44E9-BC32-92DCB83EA010}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetManagementDAL", "TimesheetManagementDAL\TimesheetManagementDAL.csproj", "{7DD44BBD-53C7-4F8F-B2B0-2EBB0811E056}"
