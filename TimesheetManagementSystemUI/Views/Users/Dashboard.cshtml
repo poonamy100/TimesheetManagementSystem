@@ -1,0 +1,27 @@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+  <style>
+    section {
+      padding: 7px 15px 7px 15px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<!-- https://codepen.io/fannigraphic/pen/aBrRKW -->
+<section>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a asp-action="Dashboard" class="nav-link active" aria-current="page">Dashboard</a>
+  </li>
+  <li class="nav-item">
+    <a asp-action="ViewTimeSlots" class="nav-link">ViewTimeSlots</a>
+  </li>
+</ul>
+</section>

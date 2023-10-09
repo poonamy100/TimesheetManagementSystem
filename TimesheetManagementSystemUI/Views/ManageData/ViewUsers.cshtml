@@ -1,0 +1,70 @@
+@model IEnumerable<TimesheetManagementDAL.Models.AppUser>
+  
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+  <style>
+    section {
+      padding: 7px 15px 7px 15px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<!-- https://codepen.io/fannigraphic/pen/aBrRKW -->
+
+<section>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a asp-area="" asp-controller="ManageData" asp-action="ViewUsers" class="nav-link active" aria-current="page">Users</a>
+  </li>
+  <li class="nav-item">
+    <a asp-area="" asp-controller="ManageData" asp-action="ViewLocations" class="nav-link">Locations</a>
+  </li>
+  <li class="nav-item">
+    <a asp-area="" asp-controller="ManageData" asp-action="ViewSectors" class="nav-link">Sectors</a>
+  </li>
+</ul>
+</section>
+
+
+<section>
+  <button type="button" class="btn btn-dark">
+    <a asp-area="Identity" asp-page="/Account/Register">Add New User</a>
+  </button>
+</section>
+
+<section>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">LastName</th>
+      <th scope="col">Location</th>
+      <th scope="col">Manage</th>
+    <tr>
+  </thead>
+  <tbody>
+    <tr>
+      @foreach(var user in Model)
+      {
+        <td>@Html.DisplayFor(modelItem => user.Id)</td>
+        <td>@Html.DisplayFor(modelItem =>user.FirstName)</td>
+        <td>@Html.DisplayFor(modelItem =>user.LastName)</td>
+        <td>@Html.DisplayFor(modelItem =>user.LocationId)</td>
+
+        <td>
+          @Html.ActionLink("Save", "Save", new { id = user.Id })
+          @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+        </td>
+      }
+    </tr>
+  </tbody>
+</table>
+</section>

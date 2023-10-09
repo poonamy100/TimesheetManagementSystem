@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -26,9 +25,30 @@
             }
         },
         {
-            "name": ".NET Core Attach",
+            "name": ".NET Core",
             "type": "coreclr",
-            "request": "attach"
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/TimesheetManagementSystemUI/bin/Debug/net7.0/TimesheetManagementSystemUI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/TimesheetManagementSystemUI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Compound",
+            "configurations": [".NET Core",".NET Core Launch (web)"]
         }
     ]
 }

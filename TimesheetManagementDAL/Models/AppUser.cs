@@ -17,6 +17,7 @@ namespace TimesheetManagementDAL.Models
         public required string LastName { get;set; }
         [Required]
         [ForeignKey("Location")]
-        public required int LocationId { get;set; }
+        public required int LocationId {get;set;}
+        public required Location Location { get;set; }
     }
 }

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TimesheetManagementDAL.Data;
+using TimesheetManagementDAL.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

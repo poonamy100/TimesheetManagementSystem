@@ -12,9 +12,11 @@ namespace TimesheetManagementDAL.Models
         [Key]
         public int Id {get;set;}
         [Required]
-        public string? Address;
+        public string? Address {get;set;}
+
         [Required]
         [ForeignKey("Sector")]
-        public required int SectorId;
+        public required int SectorId {get;set;}
+        public required Sector Sector {get;set;}
     }
 }

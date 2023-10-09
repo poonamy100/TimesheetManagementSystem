@@ -58,7 +58,9 @@ namespace TimesheetManagementAPIServices.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SectorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
