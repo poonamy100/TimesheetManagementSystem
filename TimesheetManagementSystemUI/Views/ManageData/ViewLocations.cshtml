@@ -1,3 +1,4 @@
+@model IEnumerable<TimesheetManagementDAL.Models.Location>
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
@@ -7,9 +8,47 @@
     <a asp-area="" asp-controller="ManageData" asp-action="ViewUsers" class="nav-link">Users</a>
   </li>
   <li class="nav-item">
-    <a asp-area="" asp-controller="ManageData" asp-action="ViewLocations" class="nav-link active" aria-current="page">Locations</a>
+    <a asp-area="" asp-controller="Locations" asp-action="Index" class="nav-link active" aria-current="page">Locations</a>
   </li>
   <li class="nav-item">
-    <a asp-area="" asp-controller="ManageData" asp-action="ViewSectors" class="nav-link">Sectors</a>
+        <a asp-area="" asp-controller="Sectors" asp-action="Index" class="nav-link">Sectors</a>
   </li>
 </ul>
+<section>
+    <button type="button" class="btn btn-dark">
+        <a asp-area="" asp-page="Locations">Add New Location</a>
+    </button>
+</section>
+
+<section>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sector)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sector.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
