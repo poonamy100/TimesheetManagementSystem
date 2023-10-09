@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using TimesheetManagementDAL.Data;
 using TimesheetManagementDAL.Models;
 
@@ -45,15 +46,25 @@ namespace TimesheetManagementAPIServices.Repositorys
 
         public async Task<IEnumerable<Location>> GetAllLocations()
         {
+            List<Location> ListofLocation = new List<Location>();
             try
             {
-                var location = await _appDbContext.Locations.ToListAsync();
-                return location;
+                //var location = await _appDbContext.Locations.ToListAsync();
+                ListofLocation = (from l in _appDbContext.Locations
+                                join s in _appDbContext.Sectors on l.SectorId equals s.Id into Group1
+                                  from dd1 in Group1.DefaultIfEmpty()
+                                  select new Location
+                                  {
+                                      Address = l.Address,
+                                      SectorName = dd1.Name
+                                  }).ToList();
+               
             }
             catch
             {
                 throw;
             }
+            return ListofLocation;
         }
 
         public async Task<Location> GetLocationById(int? id)
