@@ -1,6 +1,24 @@
+@model IEnumerable<TimesheetManagementDAL.Models.TimeSlot>
+
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
+    var context = ViewBag.Context as TimesheetManagementDAL.Data.AppDbContext;
 }
+
+<head>
+  <style>
+    section {
+      padding: 7px 15px 7px 15px;
+    }
+    td {
+      margin-bottom: 20px; //you want space 
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -10,3 +28,68 @@
     <a asp-action="ViewTimeSlots" class="nav-link active" aria-current="page">ViewTimeSlots</a>
   </li>
 </ul>
+
+<section>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <form asp-controller="Users" asp-action="AddTimeSlots">
+        <td style="padding: 10px">
+          <label>Date</label>
+          <input type="Date" name="Date"></input>
+        </td>
+        <td style="padding: 10px">
+          <label>StartTime</label>
+          <input type="time" name="Start"></input>
+        </td>
+        <td style="padding: 10px">
+          <label>EndTime</label>
+          <input type="time" name="End"></input>
+        </td>
+        <td style="padding: 10px">
+          <input type="submit" value="Add New TimeSlot" class="btn btn-primary" />
+        </td>
+      </form>
+    </tr>
+  </table>
+</section>
+
+<section>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Name</th>
+      <th scope="col">TimeIn</th>
+      <th scope="col">TimeOut</th>
+      <th scope="col">Hrs Worked</th>
+      <th scope="col">Manage</th>
+    <tr>
+  </thead>
+  <tbody>
+    @foreach(var TimeSlot in Model)
+    {
+      <tr>
+        @{var strippedDate = TimeSlot.Date.ToShortDateString();}
+        <td>@Html.DisplayFor(modelItem => strippedDate)</td>
+        @{var user = await context.Users.FirstOrDefaultAsync(k=>k.Id == TimeSlot.AppUserId);}
+        <td>@user.FirstName @user.LastName</td>
+        @{var strippedStart = TimeSlot.Start.ToString("hh:mm:ss tt");}
+        <td>@Html.DisplayFor(modelItem => strippedStart)</td>
+        @{var strippedEnd = TimeSlot.End.ToString("hh:mm:ss tt");}
+        <td>@Html.DisplayFor(modelItem => strippedEnd)</td>
+        @{var hrsWorked = TimeSlot.End.TimeOfDay - TimeSlot.Start.TimeOfDay;}
+        <td>@Html.DisplayFor(modelItem => hrsWorked)</td>
+
+
+        <td>
+          <form asp-controller="Users" asp-action="DeleteTimeSlots">
+            <button type="submit" class="btn btn-danger" name="SlotId" value="@TimeSlot.Id">Delete</button>
+          </form>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+</section>
+
+

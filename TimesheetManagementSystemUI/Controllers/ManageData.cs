@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TimesheetManagementDAL.Data;
+using TimesheetManagementDAL.Models;
 
 namespace TimesheetManagementSystemUI.Controllers
 {
@@ -22,17 +23,37 @@ namespace TimesheetManagementSystemUI.Controllers
             _context = context;
         }
 
-        // GET: Users/ViewUsers
+
+        //MANAGE USERS ------------------------------------------------------------------------------//
+        // GET: ManageData
         public async Task<IActionResult> ViewUsers()
         {
             return (_context.Users != null) ? View(await _context.Users.ToListAsync()) : Problem("Entity Set Users Empty");
         }
-        // POST: Users/ViewUsers/
+
         [HttpPost]
-        public IActionResult ViewUsers(int? Id)
+        public async Task<ActionResult> UpdateUser(AppUser user)
         {
-            return View();
+            AppUser UpdatedAppUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+
+            UpdatedAppUser.FirstName = user.FirstName;
+            UpdatedAppUser.LastName = user.LastName;
+            UpdatedAppUser.LocationId = user.LocationId;
+            await _context.SaveChangesAsync();
+ 
+            return new EmptyResult();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteUser(string Id)
+        {
+            AppUser AppUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
+            _context.Users.Remove(AppUser);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ViewUsers));
+        }
+        //-------------------------------------------------------------------------------------------//
 
         // GET: ManageData/ViewLocations
         public IActionResult ViewLocations()

@@ -14,6 +14,7 @@ namespace TimesheetManagementDAL.Models
         [ForeignKey("AppUser")]
         public required string AppUserId {get;set;}
         public required AppUser AppUser {get;set;}
+        public DateTime Date {get;set;}
         public DateTime Start {get;set;}
         public DateTime End {get;set;}
     }

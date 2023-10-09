@@ -1,7 +1,7 @@
 @model IEnumerable<TimesheetManagementDAL.Models.AppUser>
-  
+
 @{
-    Layout = "/Views/Shared/_Layout.cshtml";
+  var context = ViewBag.Context as TimesheetManagementDAL.Data.AppDbContext;
 }
 
 <head>
@@ -9,14 +9,8 @@
     section {
       padding: 7px 15px 7px 15px;
     }
-    a {
-      color: white;
-      text-decoration: none;
-    }
   </style>
 </head>
-
-<!-- https://codepen.io/fannigraphic/pen/aBrRKW -->
 
 <section>
 <ul class="nav nav-tabs">
@@ -43,28 +37,34 @@
 <table class="table table-dark table-striped">
   <thead>
     <tr>
-      <th scope="col">Id</th>
       <th scope="col">Firstname</th>
       <th scope="col">LastName</th>
       <th scope="col">Location</th>
+      <th scope="col">Sector</th>
       <th scope="col">Manage</th>
     <tr>
-  </thead>
+  <thead>
   <tbody>
-    <tr>
       @foreach(var user in Model)
       {
-        <td>@Html.DisplayFor(modelItem => user.Id)</td>
-        <td>@Html.DisplayFor(modelItem =>user.FirstName)</td>
-        <td>@Html.DisplayFor(modelItem =>user.LastName)</td>
-        <td>@Html.DisplayFor(modelItem =>user.LocationId)</td>
+        <tr>
+          <td>@Html.DisplayFor(modelItem => @user.FirstName)</td>
+          <td>@Html.DisplayFor(modelItem => @user.LastName)</td>
+          
+          @{var Location = await context.Locations.FirstOrDefaultAsync(L => L.Id == user.LocationId);}
+          <td>@Html.DisplayFor(modelItem => Location.Address)</td>
+          
+          @{var Sector = await context.Sectors.FirstOrDefaultAsync(L => L.Id == Location.SectorId);}
+          <td>@Html.DisplayFor(modelItem => Sector.Name)</td>
 
-        <td>
-          @Html.ActionLink("Save", "Save", new { id = user.Id })
-          @Html.ActionLink("Delete", "Delete", new { id = user.Id })
-        </td>
+          <td>
+            <form asp-controller="ManageData" asp-action="DeleteUser">
+              <button type="submit" class="btn btn-danger" name="Id" value="@user.Id">Delete</button>
+            </form>
+          </td>
+        </tr>
       }
-    </tr>
   </tbody>
 </table>
 </section>
+

@@ -1,3 +1,5 @@
+@model IEnumerable<TimesheetManagementDAL.Models.AppUser>
+
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
@@ -25,3 +27,36 @@
   </li>
 </ul>
 </section>
+<!--
+<section>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">LastName</th>
+      <th scope="col">Location</th>
+      <th scope="col">Manage</th>
+    <tr>
+  </thead>
+  <tbody>
+    <tr>
+      @foreach(var user in Model)
+      {
+        <td>@Html.DisplayFor(modelItem => user.Id)</td>
+        <td>@Html.DisplayFor(modelItem => user.FirstName)</td>
+        <td>@Html.DisplayFor(modelItem => user.LastName)</td>
+        <td>@Html.DisplayFor(modelItem => user.LocationId)</td>
+
+        <td>
+          <a class="Edit" href="javascript:;">Edit</a>
+          <a class="Update" href="javascript:;" style="display:none">Update</a>
+          <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+          <a class="Delete" href="javascript:;">Delete</a>
+        </td>
+      }
+    </tr>
+  </tbody>
+</table>
+</section>
+-->

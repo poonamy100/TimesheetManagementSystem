@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TimesheetManagementDAL.Data;
+using TimesheetManagementDAL.Models;
 
 namespace TimesheetManagementSystemUI.Controllers
 {
@@ -35,15 +36,37 @@ namespace TimesheetManagementSystemUI.Controllers
         }
 
         // GET: Users/ViewTimeSlots
-        public IActionResult ViewTimeSlots()
+        public async Task<IActionResult> ViewTimeSlots()
         {
-            return View();
+            return (_context.Users != null) ? View(await _context.TimeSlots.ToListAsync()) : Problem("Entity Set Users Empty");
         }
-        // POST: Users/ViewTimeSlots/
+
         [HttpPost]
-        public IActionResult ViewTimeSlots(int? Id)
+        public async Task<IActionResult> AddTimeSlots(DateTime Date, DateTime Start, DateTime End)
         {
-            return View();
+            AppUser CurrentUser = await _context.Users.FirstOrDefaultAsync(k => k.UserName == User.Identity.Name);
+            TimeSlot newTimeSlot = new TimeSlot()
+            {
+                AppUserId = CurrentUser.Id,
+                AppUser = CurrentUser,
+                Date = Date,
+                Start = Start,
+                End = End
+            };
+            
+             _context.TimeSlots.Add(newTimeSlot);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ViewTimeSlots));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTimeSlots(int SlotId)
+        {
+            TimeSlot timeSlot = await _context.TimeSlots.FindAsync(SlotId);
+            _context.TimeSlots.Remove(timeSlot);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ViewTimeSlots));
         }
 
         // GET : /Users/Error
