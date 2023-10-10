@@ -9,11 +9,11 @@ using TimesheetManagementDAL.Data;
 
 #nullable disable
 
-namespace TimesheetManagementAPIServices.Migrations
+namespace TimesheetManagementDAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231009190157_Update2")]
-    partial class Update2
+    [Migration("20231010155157_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,6 +168,10 @@ namespace TimesheetManagementAPIServices.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

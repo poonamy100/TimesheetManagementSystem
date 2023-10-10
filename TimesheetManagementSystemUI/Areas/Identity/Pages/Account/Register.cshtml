@@ -1,14 +1,61 @@
 ﻿@page
-@Html.ValidationSummary(false,"Please fix following error and then submit form")
+<!--@Html.ValidationSummary(false,"Please fix following error and then submit form")-->
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<head>
+    <style>
+        select {
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            -ms-appearance:none;
+            appearance:none;
+            outline:0;
+            box-shadow:none;
+            border:0!important;
+            background: #5c6664;
+            background-image: none;
+            flex: 1;
+            padding: 0 .5em;
+            color:#fff;
+            cursor:pointer;
+            font-size: 1em;
+            font-family: 'Open Sans', sans-serif;
+        }
+        select::-ms-expand {
+            display: none;
+        }
+        .select {
+            position: relative;
+            display: flex;
+            /*width: 20em;*/
+            height: 3em;
+            line-height: 3;
+            background: #5c6664;
+            overflow: hidden;
+            border-radius: .25em;
+        }
+        .select::after {
+            content: '\25BC';
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0 1em;
+            background: #2b2e2e;
+            cursor:pointer;
+            pointer-events:none;
+            transition:.25s all ease;
+        }
+        .select:hover::after {
+            color: #23b499;
+        }
+    </style>
+</head>
 
 <div class="row">
-    <div class="col-md-4">
+    <!--<div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Register New User</h2>
             <hr />
@@ -22,6 +69,11 @@
                 <input asp-for="Input.LastName" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.LastName">LastName</label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Description" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Description">Description</label>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
                 <select name="LocationId">   
                     @foreach (var Loc in Model.Locations)
@@ -52,37 +104,123 @@
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
+</div> -->
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
+            class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+            alt="Sample photo">
+          <div class="card-body p-4 p-md-5">
+            <!--<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>-->
+
+            <!--<form class="px-md-2">
+
+              <div class="form-outline mb-4">
+                <input type="text" id="form3Example1q" class="form-control" />
+                <label class="form-label" for="form3Example1q">Name</label>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline datepicker">
+                    <input type="text" class="form-control" id="exampleDatepicker1" />
+                    <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <select class="select">
+                    <option value="1" disabled>Gender</option>
+                    <option value="2">Female</option>
+                    <option value="3">Male</option>
+                    <option value="4">Other</option>
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="mb-4">
+
+                <select class="select">
+                  <option value="1" disabled>Class</option>
+                  <option value="2">Class 1</option>
+                  <option value="3">Class 2</option>
+                  <option value="4">Class 3</option>
+                </select>
+
+              </div>
+
+              <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
+                <div class="col-md-6">
+
+                  <div class="form-outline">
+                    <input type="text" id="form3Example1w" class="form-control" />
+                    <label class="form-label" for="form3Example1w">Registration code</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+
+            </form>-->
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="px-md-2">
+                <h2>Register New User</h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FirstName" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.FirstName">FirstName</label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.LastName" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.LastName">LastName</label>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Description" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Description">Description</label>
+                    <span asp-validation-for="Input.Description" class="text-danger"></span>
+                </div>
+                <div class="select mb-3">
+                    <select name="LocationId">   
+                        @foreach (var Loc in Model.Locations)
+                        {  
+                            <option value="@Loc.Id">
+                                @Loc.Sector.Name, @Loc.Address 
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-primary" style="background-color: #CFD8DC; border-color: #CFD8DC;">Register</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

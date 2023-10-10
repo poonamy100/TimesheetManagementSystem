@@ -90,6 +90,9 @@ namespace TimesheetManagementSystemUI.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "LastName")]
             public string LastName { get; set; }
+            [Required]
+            [Display(Name = "Description")]
+            public string Description { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -152,7 +155,7 @@ namespace TimesheetManagementSystemUI.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    //await _userManager.AddClaimAsync(user, new("Admin","Admin"));
+                    await _userManager.AddClaimAsync(user, new("Admin","Admin"));
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -195,6 +198,7 @@ namespace TimesheetManagementSystemUI.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Email = Input.Email,
+                    Description = Input.Description,
                     LocationId = LocationId,
                     Location = await _context.Locations.FirstOrDefaultAsync(k=>k.Id == LocationId)
                 };

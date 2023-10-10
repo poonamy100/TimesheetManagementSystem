@@ -15,6 +15,13 @@ builder.Services.AddTransient<ISectorRepository, SectorRepository>();
 
 builder.Services.AddRazorPages();
 
+builder.Services.AddAuthorization(
+    options =>
+    {
+        options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+    }
+);
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

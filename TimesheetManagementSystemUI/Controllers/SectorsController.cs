@@ -5,9 +5,11 @@ using TimesheetManagementDAL.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimesheetManagementSystemUI.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class SectorsController : Controller
     {
         private IConfiguration _configure;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using TimesheetManagementDAL.Models;
 namespace TimesheetManagementSystemUI.Controllers
 {
     //[Route("[controller]")]
+    [Authorize(Policy = "AdminOnly")]
     public class ManageData : Controller
     {
         private readonly AppDbContext _context;
@@ -38,6 +40,7 @@ namespace TimesheetManagementSystemUI.Controllers
                     Id = U.Id,
                     FirstName = U.FirstName,
                     LastName = U.LastName,
+                    Description = U.Description,
                     LocationId = U.LocationId,
                     Location = U.Location
                 }

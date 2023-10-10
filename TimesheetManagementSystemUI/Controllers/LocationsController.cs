@@ -4,9 +4,11 @@ using Newtonsoft.Json;
 using TimesheetManagementDAL.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimesheetManagementSystemUI.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class LocationsController : Controller
     {
         private IConfiguration _configure;

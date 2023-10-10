@@ -5,9 +5,10 @@ using TimesheetManagementAPIServices.Repositorys;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddDbContext<AppDbContext>(
-//    options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default"),k => k.MigrationsAssembly("TimesheetManagementAPIServices"))
-//);
+/*builder.Services.AddDbContext<AppDbContext>(
+   options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default"),k => k.MigrationsAssembly("TimesheetManagementAPI"))
+);
+*/
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
 );
