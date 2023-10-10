@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace TimesheetManagementDAL.Models
+namespace TimesheetManagementSystemUI.Models
 {
     public class Location
     {
@@ -13,8 +11,7 @@ namespace TimesheetManagementDAL.Models
         public string? Address { get; set; }
         [Required]
         [ForeignKey("Sector")]
-        public int SectorId { get; set; }
+        public required int SectorId { get; set; }
         public Sector Sector { get; set; }
-
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TimesheetManagementAPIServices.Repositorys;
 using TimesheetManagementDAL.Data;
 using TimesheetManagementDAL.Models;
 
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddTransient<ISectorRepository, SectorRepository>();
 
 builder.Services.AddRazorPages();
 

@@ -9,6 +9,10 @@
     section {
       padding: 7px 15px 7px 15px;
     }
+    a {
+      color: white;
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -18,10 +22,10 @@
     <a asp-area="" asp-controller="ManageData" asp-action="ViewUsers" class="nav-link active" aria-current="page">Users</a>
   </li>
   <li class="nav-item">
-    <a asp-area="" asp-controller="ManageData" asp-action="ViewLocations" class="nav-link">Locations</a>
+    <a asp-area="" asp-controller="Locations" asp-action="Index" class="nav-link">Locations</a>
   </li>
   <li class="nav-item">
-    <a asp-area="" asp-controller="ManageData" asp-action="ViewSectors" class="nav-link">Sectors</a>
+    <a asp-area="" asp-controller="Sectors" asp-action="Index" class="nav-link">Sectors</a>
   </li>
 </ul>
 </section>
@@ -50,11 +54,8 @@
         <tr>
           <td>@Html.DisplayFor(modelItem => @user.FirstName)</td>
           <td>@Html.DisplayFor(modelItem => @user.LastName)</td>
-          
-          @{var Location = await context.Locations.FirstOrDefaultAsync(L => L.Id == user.LocationId);}
-          <td>@Html.DisplayFor(modelItem => Location.Address)</td>
-          
-          @{var Sector = await context.Sectors.FirstOrDefaultAsync(L => L.Id == Location.SectorId);}
+          <td>@Html.DisplayFor(modelItem => @user.Location.Address)</td>
+          @{var Sector = await context.Sectors.FindAsync(@user.Location.SectorId);}
           <td>@Html.DisplayFor(modelItem => Sector.Name)</td>
 
           <td>

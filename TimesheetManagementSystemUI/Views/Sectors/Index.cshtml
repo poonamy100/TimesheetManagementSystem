@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TimesheetManagementDAL.Models.Sector>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+  <style>
+    section {
+      padding: 7px 15px 7px 15px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<section>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a asp-area="" asp-controller="ManageData" asp-action="ViewUsers" class="nav-link">Users</a>
+  </li>
+  <li class="nav-item">
+        <a asp-area="" asp-controller="Locations" asp-action="Index" class="nav-link">Locations</a>
+  </li>
+  <li class="nav-item">
+        <a asp-area="" asp-controller="Sectors" asp-action="Index" class="nav-link active" aria-current="page">Sectors</a>
+  </li>
+</ul>
+</section>
+
+<section>
+    <button type="button" class="btn btn-dark">
+        <a asp-area="" asp-page="/Sectors">Add New Sector</a>
+    </button>
+</section>
+
+<section>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Manage</th>
+    <tr>
+  <thead>
+  <tbody>
+      @foreach(var Sector in Model)
+      {
+        <tr>
+          <td>@Html.DisplayFor(modelItem => @Sector.Id)</td>
+          <td>@Html.DisplayFor(modelItem => @Sector.Name)</td>
+          <td>
+            <a asp-controller="Sectors" asp-action="Details">
+              <button type="submit" class="btn btn-primary" name="Id" value="@Sector.Id">Details</button>
+            </a>
+            <a asp-controller="Sectors" asp-action="Edit">
+              <button type="submit" class="btn btn-secondary" name="Id" value="@Sector.Id">Edit</button>
+            </a>
+            <a asp-controller="Sectors" asp-action="Delete">
+              <button type="submit" class="btn btn-danger" name="Id" value="@Sector.Id">Delete</button>
+            </a>
+          </td>
+        </tr>
+      }
+  </tbody>
+</table>
+</section>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TimesheetManagementDAL.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+  <style>
+    section {
+      padding: 7px 15px 7px 15px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<section>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a asp-area="" asp-controller="ManageData" asp-action="ViewUsers" class="nav-link">Users</a>
+  </li>
+  <li class="nav-item">
+        <a asp-area="" asp-controller="Locations" asp-action="Index" class="nav-link active" aria-current="page">Locations</a>
+  </li>
+  <li class="nav-item">
+        <a asp-area="" asp-controller="Sectors" asp-action="Index" class="nav-link">Sectors</a>
+  </li>
+</ul>
+</section>
+
+<section>
+    <button type="button" class="btn btn-dark">
+        <a asp-area="" asp-page="/Locations">Add New Sector</a>
+    </button>
+</section>
+
+<section>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Address</th>
+      <th scope="col">Sector</th>
+      <th scope="col">Manage</th>
+    <tr>
+  <thead>
+  <tbody>
+      @foreach(var Location in Model)
+      {
+        <tr>
+          <td>@Html.DisplayFor(modelItem => @Location.Id)</td>
+          <td>@Html.DisplayFor(modelItem => @Location.Address)</td>
+          <td>@Html.DisplayFor(modelItem => @Location.Sector.Name)</td>
+          <td>
+            <a asp-controller="Locations" asp-action="Details">
+              <button type="submit" class="btn btn-primary" name="Id" value="@Location.Id">Details</button>
+            </a>
+            <a asp-controller="Locations" asp-action="Edit">
+              <button type="submit" class="btn btn-secondary" name="Id" value="@Location.Id">Edit</button>
+            </a>
+            <a asp-controller="Locations" asp-action="Delete">
+              <button type="submit" class="btn btn-danger" name="Id" value="@Location.Id">Delete</button>
+            </a>
+          </td>
+        </tr>
+      }
+  </tbody>
+</table>
+</section>

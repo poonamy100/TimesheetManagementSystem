@@ -124,8 +124,17 @@ namespace TimesheetManagementSystemUI.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            Locations = await _context.Locations.ToListAsync();
-        }
+            Locations = (from l in _context.Locations
+                join s in _context.Sectors on l.SectorId equals s.Id into Group1
+                from dd1 in Group1.DefaultIfEmpty()
+                select new Location
+                {
+                    Id = l.Id,
+                    Address = l.Address,
+                    SectorId = l.SectorId,
+                    Sector = l.Sector
+                }).ToList();
+}
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {

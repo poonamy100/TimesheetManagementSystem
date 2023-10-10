@@ -8,7 +8,7 @@ using TimesheetManagementDAL.Data;
 
 #nullable disable
 
-namespace TimesheetManagementAPIServices.Migrations
+namespace TimesheetManagementDAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -220,8 +220,6 @@ namespace TimesheetManagementAPIServices.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -249,8 +247,6 @@ namespace TimesheetManagementAPIServices.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SectorId");
 
                     b.ToTable("Locations");
                 });
@@ -282,7 +278,7 @@ namespace TimesheetManagementAPIServices.Migrations
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -294,8 +290,6 @@ namespace TimesheetManagementAPIServices.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("TimeSlots");
                 });
@@ -349,39 +343,6 @@ namespace TimesheetManagementAPIServices.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TimesheetManagementDAL.Models.AppUser", b =>
-                {
-                    b.HasOne("TimesheetManagementDAL.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("TimesheetManagementDAL.Models.Location", b =>
-                {
-                    b.HasOne("TimesheetManagementDAL.Models.Sector", "Sector")
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sector");
-                });
-
-            modelBuilder.Entity("TimesheetManagementDAL.Models.TimeSlot", b =>
-                {
-                    b.HasOne("TimesheetManagementDAL.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
                 });
 #pragma warning restore 612, 618
         }

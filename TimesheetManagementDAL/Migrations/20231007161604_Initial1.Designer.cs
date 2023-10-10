@@ -9,11 +9,11 @@ using TimesheetManagementDAL.Data;
 
 #nullable disable
 
-namespace TimesheetManagementAPIServices.Migrations
+namespace TimesheetManagementDAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231006142859_Initial")]
-    partial class Initial
+    [Migration("20231007161604_Initial1")]
+    partial class Initial1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

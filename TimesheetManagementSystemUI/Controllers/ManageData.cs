@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TimesheetManagementDAL.Data;
@@ -28,7 +29,21 @@ namespace TimesheetManagementSystemUI.Controllers
         // GET: ManageData
         public async Task<IActionResult> ViewUsers()
         {
-            return (_context.Users != null) ? View(await _context.Users.ToListAsync()) : Problem("Entity Set Users Empty");
+            List<AppUser> Users = (
+                from U in _context.Users
+                join l in _context.Locations on U.LocationId equals l.Id into Group1
+                from dd1 in Group1.DefaultIfEmpty()
+                select new AppUser
+                {
+                    Id = U.Id,
+                    FirstName = U.FirstName,
+                    LastName = U.LastName,
+                    LocationId = U.LocationId,
+                    Location = U.Location
+                }
+                ).ToList();
+                
+            return View(Users);
         }
 
         [HttpPost]

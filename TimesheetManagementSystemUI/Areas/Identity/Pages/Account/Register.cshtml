@@ -27,7 +27,7 @@
                     @foreach (var Loc in Model.Locations)
                     {  
                         <option value="@Loc.Id">
-                            @Loc.SectorId, @Loc.Address 
+                            @Loc.Sector.Name, @Loc.Address 
                         </option>
                     }
                 </select>
