@@ -5,6 +5,9 @@ using TimesheetManagementDAL.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace TimesheetManagementSystemUI.Controllers
 {
@@ -20,6 +23,7 @@ namespace TimesheetManagementSystemUI.Controllers
 
         public async Task<IActionResult> Index()
         {
+            getSectorListAsync();
             List<Location> locationList = new List<Location>();
             using (var httpClient = new HttpClient())
             {
@@ -31,6 +35,28 @@ namespace TimesheetManagementSystemUI.Controllers
             }
             return View(locationList);
         }
+
+        private async Task getSectorListAsync()
+        {
+            List<Sector> sectorList = new List<Sector>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(apiBaseUrl + "api/Sector/Get"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    sectorList = JsonConvert.DeserializeObject<List<Sector>>(apiResponse);                   
+                }
+            }
+            List<SelectListItem> ddlListItems = new List<SelectListItem>();
+
+            foreach (var item in sectorList)
+            {               
+                ddlListItems.Add(new SelectListItem() { Text = item.Name, Value = item.Id.ToString() });
+            }
+
+            TimesheetManagementSystemUI.Models.LocationModel.ListofSectors = ddlListItems; 
+        }
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,7 +82,7 @@ namespace TimesheetManagementSystemUI.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {
+        {            
             return View();
         }
         [HttpPost]

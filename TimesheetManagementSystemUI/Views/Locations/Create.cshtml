@@ -1,4 +1,5 @@
-﻿@model TimesheetManagementDAL.Models.Location
+﻿@using static TimesheetManagementSystemUI.Models.LocationModel;
+@model TimesheetManagementSystemUI.Models.LocationModel;
 
 @{
     ViewData["Title"] = "Create";
@@ -18,10 +19,14 @@
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SectorId" class="control-label"></label>
-                <select asp-for="SectorId" class ="form-control" asp-items="ViewBag.SectorId"></select>
+             <div class="form-group">
+                <label asp-for="SectorId" class="control-label"></label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                
+                @Html.DropDownList("SectorId",new SelectList(LocationModel.ListofSectors,"Value", "Text"), new {@class="mydrowpdownstyle"})
+                <span asp-validation-for="SectorId" class="text-danger"></span>
             </div>
+            <br />
+            <br />
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -335,6 +335,13 @@ a[href*="#followme"]::before {
   -webkit-transition: all .35s ease-in-out;
 }
 
+.mydrowpdownstyle {
+    background-color: white;
+    color: black;
+    width: 420px;
+    height: 50px;
+}
+
 /*-------------------------------*/
 /*            Overlay            */
 /*-------------------------------*/

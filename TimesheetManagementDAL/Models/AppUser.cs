@@ -15,6 +15,7 @@ namespace TimesheetManagementDAL.Models
         public required string FirstName { get;set; }
         [Required]
         public required string LastName { get;set; }
+        //public String Role 
         [Required]
         public required string Description {get;set;}
         [Required]
