@@ -26,8 +26,6 @@
     <div class="col-md-4">-->
         <!--<section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
@@ -52,9 +50,9 @@
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
-                    <p>
+                   @* <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
+                    </p>*@
                     <p>
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
@@ -74,8 +72,8 @@
                         <img src="https://st4.depositphotos.com/1229718/24720/i/450/depositphotos_247203214-stock-photo-business-time-plan-concept-planning.jpg"
                             alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                         </div>
-                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                        <div class="card-body p-4 p-lg-5 text-black">
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+          <div class="card-body p-4 p-lg-5 text-black">
 
                             <!--<form>
 
@@ -127,16 +125,16 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: #CFD8DC; border-color: #CFD8DC;">Log in</button>
+                                            <button id="login-submit" type="submit" class="w-100 btn btn-primary" style="background-color: gray; border-color: #CFD8DC;">Log in</button>
                                 </div>
                                 <br></br>
                                 <div>
                                     <p>
                                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                                     </p>
-                                    <p>
+                                   @* <p>
                                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                                    </p>
+                                    </p>*@
                                     <p>
                                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                                     </p>

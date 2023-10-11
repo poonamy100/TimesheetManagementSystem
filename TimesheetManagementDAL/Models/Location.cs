@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text.Json.Serialization;
 
 namespace TimesheetManagementDAL.Models
 {
@@ -14,6 +14,7 @@ namespace TimesheetManagementDAL.Models
         [Required]
         [ForeignKey("Sector")]
         public int SectorId { get; set; }
+        
         public Sector Sector { get; set; }
 
     }

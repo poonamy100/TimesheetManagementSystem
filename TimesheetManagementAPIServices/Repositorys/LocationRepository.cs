@@ -49,7 +49,6 @@ namespace TimesheetManagementAPIServices.Repositorys
             List<Location> ListofLocation = new List<Location>();
             try
             {
-                //var location = await _appDbContext.Locations.ToListAsync();
                 ListofLocation = (from l in _appDbContext.Locations
                                 join s in _appDbContext.Sectors on l.SectorId equals s.Id into Group1
                                   from dd1 in Group1.DefaultIfEmpty()

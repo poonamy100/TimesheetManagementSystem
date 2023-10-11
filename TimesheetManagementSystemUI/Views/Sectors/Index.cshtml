@@ -33,7 +33,7 @@
 
 <section>
     <button type="button" class="btn btn-dark">
-        <a asp-area="" asp-page="/Sectors">Add New Sector</a>
+         <a asp-area="" asp-controller="Sectors" asp-action="Create" class="nav-link active" aria-current="page">Add New Sector</a>
     </button>
 </section>
 
@@ -53,13 +53,13 @@
           <td>@Html.DisplayFor(modelItem => @Sector.Id)</td>
           <td>@Html.DisplayFor(modelItem => @Sector.Name)</td>
           <td>
-            <a asp-controller="Sectors" asp-action="Details">
+           @* <a asp-controller="Sectors" asp-action="Details" asp-route-id="@Sector.Id">
               <button type="submit" class="btn btn-primary" name="Id" value="@Sector.Id">Details</button>
             </a>
-            <a asp-controller="Sectors" asp-action="Edit">
+            <a asp-controller="Sectors" asp-action="Edit" asp-route-id="@Sector.Id">
               <button type="submit" class="btn btn-secondary" name="Id" value="@Sector.Id">Edit</button>
-            </a>
-            <a asp-controller="Sectors" asp-action="Delete">
+            </a>*@
+             <a asp-controller="Sectors" asp-action="Delete" asp-route-id="@Sector.Id">
               <button type="submit" class="btn btn-danger" name="Id" value="@Sector.Id">Delete</button>
             </a>
           </td>

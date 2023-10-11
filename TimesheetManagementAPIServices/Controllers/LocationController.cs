@@ -32,10 +32,10 @@ namespace TimesheetManagementAPIServices.Controllers
         [Route("api/Location/Create")]
         public async Task CreateAsync([FromBody] Location location)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 await _locationRepository.Add(location);
-            }
+            //}
         }
 
 
